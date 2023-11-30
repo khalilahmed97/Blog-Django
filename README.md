@@ -5,7 +5,8 @@ Welcome to Django-powered Blogging API, designed for building robust and secure 
 
 ## 🚀 Key Features:
 
-#### User Registration by Email: Account creation with email validation and duplicate username/email checks.
+#### User Registration by Email: 
+Account creation with email validation and duplicate username/email checks.
 
 #### Login via Email and Password:
 
