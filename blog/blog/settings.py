@@ -1,6 +1,10 @@
 from pathlib import Path
 
 from datetime import timedelta
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -10,7 +14,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-qy1k4ba^*%ov3d(gm2_^4q$e9utj8uu_44ltoan++(j*wbgl^!'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -72,11 +76,11 @@ WSGI_APPLICATION = 'blog.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'railway', 
-        'USER': 'postgres',
-        'PASSWORD': '2CDd6gF*cgGBd-c5C4b54E4E411*g6E2',
-        'HOST': 'roundhouse.proxy.rlwy.net', 
-        'PORT': '42605',
+        'NAME': os.getenv('DATABASE_NAME'), 
+        'USER': os.getenv('DATABASE_USER'),
+        'PASSWORD': os.getenv('DATABASE_PASSWORD'),
+        'HOST': os.getenv('DATABASE_HOST'), 
+        'PORT': os.getenv('DATABASE_PORT'),
         
     }
 }
@@ -118,7 +122,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-AUTH_USER_MODEL = 'account.User'
+# AUTH_USER_MODEL = 'account.User'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -144,7 +148,7 @@ SIMPLE_JWT = {
 
     "ALGORITHM": "HS256",
  
-    "VERIFYING_KEY": "",
+    "VERIFYING_KEY":  os.getenv('SECRET_KEY'),
     "AUDIENCE": None,
     "ISSUER": None,
     "JSON_ENCODER": None,
@@ -174,10 +178,3 @@ SIMPLE_JWT = {
     "SLIDING_TOKEN_OBTAIN_SERIALIZER": "rest_framework_simplejwt.serializers.TokenObtainSlidingSerializer",
     "SLIDING_TOKEN_REFRESH_SERIALIZER": "rest_framework_simplejwt.serializers.TokenRefreshSlidingSerializer",
 }
-
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = 'smtp.gmail.com'
-# EMAIL_PORT = 587
-# EMAIL_HOST_USER = 'khalilahmedsharif123@gmail.com'
-# EMAIL_HOST_PASSWORD = 'bylrykfiukusjecx'
-# EMAIL_USE_TLS = True
