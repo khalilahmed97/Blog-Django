@@ -8,7 +8,7 @@ Welcome to Django-powered Blogging API, designed for building robust and secure 
 #### User Registration by Email: 
 Account creation with email validation and duplicate username/email checks.
 
-#### Login via Email and Password:
+#### Login via Email and Password.
 
 #### JWT token generation upon successful login.
 
