@@ -22,6 +22,10 @@ Account creation with email validation and duplicate username/email checks.
 
 ### Authentication and Token Generation API Endpoints:
 
+### NOTE:
+
+PORT = 3000
+
 #### http://localhost:3000/api/token/generate
 #### http://localhost:3000/api/token/verify
 #### http://localhost:3000/api/token/refresh
@@ -44,9 +48,6 @@ Account creation with email validation and duplicate username/email checks.
 #### http://localhost:3000/blog/category/all/
 #### http://localhost:3000/blog/post/comment/all/
 
-
-## JWT Authentication: Secures sensitive operations and endpoints.
-Password Hashing: User passwords are securely hashed before storage.
 
 ## 🗺️ Database:
 
