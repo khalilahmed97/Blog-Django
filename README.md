@@ -5,19 +5,17 @@ Welcome to Django-powered Blogging API, designed for building robust and secure 
 
 ## 🚀 Key Features:
 
-### User Registration by Email:
+#### User Registration by Email: Account creation with email validation and duplicate username/email checks.
 
-Account creation with email validation and duplicate username/email checks.
+#### Login via Email and Password:
 
-### Login via Email and Password:
+#### JWT token generation upon successful login.
 
-### JWT token generation upon successful login.
+#### Creating a New Blog Post:
 
-### Creating a New Blog Post:
+#### Post creation with required authentication using JWT.
 
-### Post creation with required authentication using JWT.
-
-## Comment on blog posts.
+#### Comment on blog posts.
 
 ## 🔐 API Endpoints used in the project:
 
