@@ -39,28 +39,32 @@ class LoginView(APIView):
     
     def post(self, request):
         try:
+
             data = request.data
-            user = User.objects.filter(email= data["email"]).first()
-            if not user:
-                return Response({
-                    'data': serializer.errors,
-                    'message': 'INVALID CREDENTIALS :('
-                }, status=status.HTTP_400_BAD_REQUEST) 
-            
-            
-            if not user.check_password(data["password"]):
-                return Response({
-                    'data': serializer.errors,
-                    'message': 'INVALID PASSWORD :('
-                }, status=status.HTTP_400_BAD_REQUEST) 
-        
             serializer = LoginSerializer(data=data)
+            user = User.objects.filter(email= data["email"]).first()
 
             if not serializer.is_valid():
                 return Response({
                     'data': serializer.errors,
                     'message': 'SOMETHING WENT WRONG :('
                 }, status=status.HTTP_400_BAD_REQUEST) 
+            
+            if not user:
+                return Response({
+                    'data': serializer.errors,
+                    'message': 'INVALID CREDENTIALS :('
+                }, status=status.HTTP_400_BAD_REQUEST)      
+                 
+            if not user.check_password(data["password"]):
+                return Response({
+                    'data': serializer.errors,
+                    'message': 'INVALID PASSWORD :('
+                }, status=status.HTTP_400_BAD_REQUEST) 
+        
+           
+
+          
         
             response = serializer.get_jwt_token(user)
             return Response(
@@ -80,8 +84,7 @@ class LogoutView(APIView):
     def post(self, request):
         try:
              data = request.data
-            
-             serializer = LogoutSerializer(data=data)
+             serializer = LogoutSerializer(data=data) 
              if not serializer.is_valid():
                 return Response({
                     'data': serializer.errors,
