@@ -26,8 +26,6 @@ class BlogPost (models.Model):
     title = models.CharField(max_length=100)
     body = models.TextField(max_length=1000)
     categories = models.ManyToManyField(Category, related_name="posts_list", blank=True)
-    likes = models.ManyToManyField(User, related_name="post_likes", blank=True
-    )
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)
 
