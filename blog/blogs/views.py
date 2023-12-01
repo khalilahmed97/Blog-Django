@@ -2,19 +2,27 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.http import JsonResponse
 from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import permission_classes
 
 from .serializers import Post, PostComment, BlogCategory
 
 
-class BlogPostCategory(APIView):
-    def get(self, request):
-        if request.method == "GET":
-            serializer = BlogCategory()
+class Category(APIView):
+    def get(self, request, id=None):
+        serializer = BlogCategory()
+        if request.method == "GET" and id is None:
             category = serializer.getAllCategory()
             return JsonResponse( {
                     'category' : category
                 }, status= status.HTTP_200_OK)
-
+        
+        if request.method == "GET" and id is not None:
+            category = serializer.getCategory(pk=id)
+            return JsonResponse( {
+                'category' : category
+            }, status= status.HTTP_200_OK)
+        
     def post(self, request):
         if request.method == "POST":
             try:
@@ -40,15 +48,21 @@ class BlogPostCategory(APIView):
                         'message': 'SOMETHING WENT WRONG :('
                     }, status=status.HTTP_400_BAD_REQUEST)
 
-        
-class BlogPostView(APIView):
-    def get(self, request):
-        if request.method == "GET":
-            serializer = Post()
+@permission_classes([IsAuthenticated])
+class BlogPost(APIView):
+    def get(self, request, id=None):
+        serializer = Post()
+        if request.method == "GET" and id is None:
             posts = serializer.getAllPosts()
             return JsonResponse( {
                     'posts' : posts
                 }, status= status.HTTP_200_OK)
+        
+        if request.method == "GET" and id is not None:
+            post = serializer.getPost(pk=id)
+            return JsonResponse( {
+                    'posts' : post
+            }, status= status.HTTP_200_OK)
 
     
     def post(self, request):
@@ -75,15 +89,23 @@ class BlogPostView(APIView):
                         'message': 'SOMETHING WENT WRONG :('
                     }, status=status.HTTP_400_BAD_REQUEST)
 
+@permission_classes([IsAuthenticated])
+class Comment(APIView):
+    def get(self, request, id=None):
+        serializer = PostComment()
 
-class BlogPostCommentView(APIView):
-    def get(self, request):
-        if request.method == "GET":
-            serializer = PostComment()
+        if request.method == "GET" and id is None:
             comments = serializer.getAllComments()
             return JsonResponse( {
                     'comments' : comments
                 }, status= status.HTTP_200_OK)
+        
+
+        if request.method == "GET" and id is not None:    
+            comments = serializer.getCommentsofSpecificAuthor(pk=id)
+            return JsonResponse( {
+                    'comments' : comments
+            }, status= status.HTTP_200_OK)
 
     def post(self, request):
         if request.method == "POST":
