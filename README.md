@@ -42,9 +42,9 @@ PORT = 3000
 #### http://localhost:3000/blog/post/new/
 #### http://localhost:3000/blog/post/comment/
 
-#### http://localhost:3000/blog/post/<str:id>/
-#### http://localhost:3000/blog/category/<str:id>/
-#### http://localhost:3000/blog/author/comment/<str:id>/
+#### http://localhost:3000/blog/post/{id}/
+#### http://localhost:3000/blog/category/{id}/
+#### http://localhost:3000/blog/author/comment/{id}/
 
 ### POST REQUEST:
 
