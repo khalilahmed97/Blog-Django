@@ -69,7 +69,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'blog.wsgi.application'
 
-
+AUTH_USER_MODEL = 'account.User'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
