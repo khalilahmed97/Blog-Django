@@ -21,8 +21,12 @@ class BlogCategory(serializers.Serializer):
         return category
     
     def getAllCategory(self):
-        categories = BlogPost.objects.all()
+        categories = Category.objects.all()
         return list(categories.values())
+    
+    def getCategory(self, pk):
+        post = Category.objects.filter(name=pk)
+        return list(post.values())
     
 
 class Post(serializers.Serializer):
@@ -50,8 +54,12 @@ class Post(serializers.Serializer):
         return post
     
     def getAllPosts(self):
-        posts = BlogPost.object.all()
+        posts = BlogPost.objects.all()
         return list(posts.values())
+    
+    def getPost(self, pk):
+        post = BlogPost.objects.filter(title=pk)
+        return list(post.values())
 
 
 class PostComment(serializers.Serializer):
@@ -68,9 +76,7 @@ class PostComment(serializers.Serializer):
             # Handle the case where the user does not exist, e.g., by raising a validation error
             raise serializers.ValidationError("User with email {} does not exist.".format(comment_author))
 
-        # post = BlogPost.objects.get(author=comment_author)
-
-        
+        post = BlogPost.objects.get(author=comment_author)
         title = data['post']
         post = BlogPost.objects.get(title=title)
         if not post:
@@ -83,5 +89,11 @@ class PostComment(serializers.Serializer):
     
 
     def getAllComments(self):
-        comments = Comment.objects.all()
+        comment = Comment.objects.all()
+        return list(comment.values())
+    
+    def getCommentsofSpecificAuthor(self, pk):
+        comments = Comment.objects.filter(author_id=pk)
         return list(comments.values())
+
+    
